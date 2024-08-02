@@ -1,0 +1,32 @@
+name: 'Amazon CodeArtifact authentication'
+description: 'Logs in to the CodeArtifact for npm, Gradle, and pip'
+branding:
+  icon: 'code'
+  color: 'green'
+inputs:
+  region:
+    description: 'AWS CodeArtifact region'
+    required: true
+  domain:
+    description: 'AWS CodeArtifact domain name'
+    required: true
+  owner:
+    description: 'AWS CodeArtifact owner account ID'
+    required: true
+  duration:
+    default: '900'
+    description: 'Session duration'
+    required: false
+  type:
+    description: 'CodeArtifact repository type (npm, gradle, or pip)'
+    required: true
+  repo:
+    description: 'CodeArtifact repository name'
+    required: true
+outputs:
+  registry:
+    description: 'The URI of the CodeArtifact repository'
+runs:
+  using: 'node20'
+  main: 'dist/action/index.js'
+  post: 'dist/cleanup/index.js'
